@@ -1,0 +1,28 @@
+body {
+    margin: 0 auto;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.container {
+    margin: 0 auto;
+    padding: 30px 50px;
+    width: 400px;
+    background-color: #F2BB13;
+    button {
+        margin: 10px 0;
+        width: 100px;
+        height: 35px;
+        background-color: #D94B2B;
+    }
+    p {
+        padding: 0;
+        margin: 0;
+    }
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 10px 0;
+}
