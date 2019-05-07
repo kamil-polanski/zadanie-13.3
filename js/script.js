@@ -26,15 +26,15 @@ console.log(computerMove);
 function check() {
     if (rounds > 0) {
         if (playerMove === pcMove) {
-            output.innerText += ` remis !!`;
+            output.innerText += ` jest remis!`;
             document.querySelector(`#playerResult`).innerText = 1 + playerResult++;
             document.querySelector(`#pcResult`).innerText = 1 + pcResult++;
             console.log(playerResult);
         } else if ((playerMove === 1 && pcMove === 2) || (playerMove === 2 && pcMove === 3) || (playerMove === 3 && pcMove === 1)) {
-            output.innerText += ` wygrana !`;
+            output.innerText += ` wygrałeś !`;
             document.querySelector(`#playerResult`).innerText = 1 + playerResult++;
         } else if ((playerMove === 1 && pcMove === 3) || (playerMove === 2 && pcMove === 1) || (playerMove === 3 && pcMove === 2)) {
-            output.innerText += ` przegrana !`;
+            output.innerText += ` przegrałś !`;
             document.querySelector(`#pcResult`).innerText = 1 + pcResult++;
         }
         document.querySelector(`#rounds`).innerText = `pozostała liczba rund: ${(-1 + rounds--)}`;
@@ -87,14 +87,14 @@ function buttonClick(ele) {
 function plMove() {
     if (rounds > 0) {
         if (move == `paper`) {
-            output.innerText = `Wybrałeś kamień`;
+            output.innerText = `Wybrałeś papier i`;
             playerMove = 1;
         } else if (move == `stone`) {
             playerMove = 2;
-            output.innerText = `Wybrałeś kamien`;
+            output.innerText = `Wybrałeś kamień i`;
         } else if (move == `scissors`) {
             playerMove = 3;
-            output.innerText = `Wybrałeś nożyczki`;
+            output.innerText = `Wybrałeś nożyczki i`;
         }
         console.log(playerMove);
         pcMove = drawComputer();
