@@ -1,9 +1,10 @@
 `use strict`;
-
+var move;
 var computerMove;
 var output;
 var playerMove;
 var pcMove;
+var button = document.querySelectorAll(`.player-move`);
 var playerResult = document.querySelector(`#playerResult`).innerText = 0;
 var pcResult = document.querySelector(`#pcResult`).innerText = 0;
 var stone = document.querySelector(`#stone`);
@@ -13,7 +14,7 @@ var output = document.querySelector(`#output`);
 var rounds = document.querySelector(`#rounds`);
 var game = document.querySelector(`#new_game`);
 
-//Random number for computer
+//Random number for computer choice
 function drawComputer() {
     computerMove = Math.floor(Math.random() * 3 + 1);
     return computerMove;
@@ -21,6 +22,7 @@ function drawComputer() {
 drawComputer();
 console.log(computerMove);
 
+//check win condition
 function check() {
     if (rounds > 0) {
         if (playerMove === pcMove) {
@@ -49,7 +51,7 @@ function check() {
     }
 }
 
-
+//new gam button 
 new_game.addEventListener(`click`, function() {
     playerResult = 0;
     pcResult = 0;
@@ -64,39 +66,38 @@ new_game.addEventListener(`click`, function() {
         document.querySelector(`#rounds`).innerText = `Liczba rund nie może być ujemna lub równa zero`;
     } else {
         document.querySelector(`#rounds`).innerText = `Wybrałeś rund: ${rounds}`;
-
-
     }
 });
 
-{}
-paper.addEventListener(`click`, function() {
+//loop for button click
+for (ele of button) {
+    ele.addEventListener("click", buttonClick(ele));
+}
+
+//function for choose button
+function buttonClick(ele) {
+    return function() {
+        move = ele.getAttribute('data-move');
+        console.log(move);
+        plMove();
+    };
+}
+
+//function for player choice 
+function plMove() {
     if (rounds > 0) {
-        playerMove = 1;
+        if (move == `paper`) {
+            output.innerText = `Wybrałeś kamień`;
+            playerMove = 1;
+        } else if (move == `stone`) {
+            playerMove = 2;
+            output.innerText = `Wybrałeś kamien`;
+        } else if (move == `scissors`) {
+            playerMove = 3;
+            output.innerText = `Wybrałeś nożyczki`;
+        }
+        console.log(playerMove);
         pcMove = drawComputer();
-        output.innerText = `Wybrałeś papier`;
         check();
     }
-});
-
-stone.addEventListener(`click`, function() {
-    if (rounds > 0) {
-        playerMove = 2;
-        pcMove = drawComputer();
-        output.innerText = `Wybrałeś kamień`;
-        check();
-    }
-});
-
-scissors.addEventListener(`click`, function() {
-    if (rounds > 0) {
-        playerMove = 3;
-        pcMove = drawComputer();
-        output.innerText = `Wybrałeś nożyczki`;
-        check();
-    }
-});
-
-
-console.log(playerResult);
-console.log(pcResult);
+}
