@@ -1,20 +1,23 @@
 `use strict`;
-var move;
-var computerMove;
-var output;
-var playerMove;
-var pcMove;
-var button = document.querySelectorAll(`.player-move`);
-var playerResult = document.querySelector(`#playerResult`).innerText = 0;
-var pcResult = document.querySelector(`#pcResult`).innerText = 0;
-var stone = document.querySelector(`#stone`);
-var paper = document.querySelector(`#paper`);
-var scissors = document.querySelector(`#scissors`);
-var output = document.querySelector(`#output`);
-var rounds = document.querySelector(`#rounds`);
-var game = document.querySelector(`#new_game`);
 
-//Random number for computer choice
+let computerMove;
+const button = document.querySelectorAll(`.player-move`);
+const playerResult = document.querySelector(`#playerResult`);
+const pcResult = document.querySelector(`#pcResult`);
+const output2 = document.querySelector(`#rounds`);
+const output = document.querySelector(`#output`);
+const game = document.querySelector(`#new_game`);
+
+
+var params = {
+        move: ``,
+        pcMove: ``,
+        playerMove: ``,
+        rounds: ``,
+        playerResult: ``,
+        pcResult: ``
+    }
+    //Random number for computer choice
 function drawComputer() {
     computerMove = Math.floor(Math.random() * 3 + 1);
     return computerMove;
@@ -24,48 +27,50 @@ console.log(computerMove);
 
 //check win condition
 function check() {
-    if (rounds > 0) {
-        if (playerMove === pcMove) {
+    if (params.rounds > 0) {
+        if (params.playerMove === params.pcMove) {
             output.innerText += ` jest remis!`;
-            document.querySelector(`#playerResult`).innerText = 1 + playerResult++;
-            document.querySelector(`#pcResult`).innerText = 1 + pcResult++;
+            playerResult.innerText = 1 + params.playerResult++;
+            pcResult.innerText = 1 + params.pcResult++;
             console.log(playerResult);
-        } else if ((playerMove === 1 && pcMove === 2) || (playerMove === 2 && pcMove === 3) || (playerMove === 3 && pcMove === 1)) {
+        } else if ((params.playerMove === 1 && params.pcMove === 2) || (params.playerMove === 2 && params.pcMove === 3) || (params.playerMove === 3 && params.pcMove === 1)) {
             output.innerText += ` wygrałeś !`;
-            document.querySelector(`#playerResult`).innerText = 1 + playerResult++;
-        } else if ((playerMove === 1 && pcMove === 3) || (playerMove === 2 && pcMove === 1) || (playerMove === 3 && pcMove === 2)) {
+            playerResult.innerText = 1 + params.playerResult++;
+        } else if ((params.playerMove === 1 && params.pcMove === 3) || (params.playerMove === 2 && params.pcMove === 1) || (params.playerMove === 3 && params.pcMove === 2)) {
             output.innerText += ` przegrałś !`;
-            document.querySelector(`#pcResult`).innerText = 1 + pcResult++;
+            pcResult.innerText = 1 + params.pcResult++;
         }
-        document.querySelector(`#rounds`).innerText = `pozostała liczba rund: ${(-1 + rounds--)}`;
-        if (rounds === 0 && (playerResult < pcResult)) {
+        output2.innerText = `pozostała liczba rund: ${(-1 + params.rounds--)}`;
+        if (params.rounds === 0 && (params.playerResult < params.pcResult)) {
             output.innerText = `Koniec gry, PRZEGRANA!`;
 
-        } else if (rounds === 0 && (playerResult > pcResult)) {
+        } else if (params.rounds === 0 && (params.playerResult > params.pcResult)) {
             output.innerText = `Koniec gry, WYGRANA!`;
 
-        } else if (rounds === 0 && (playerResult == pcResult)) {
+        } else if (params.rounds === 0 && (params.playerResult == params.pcResult)) {
             output.innerText = `Koniec gry, REMIS!`;
         }
-
     }
 }
 
 //new gam button 
-new_game.addEventListener(`click`, function() {
-    playerResult = 0;
-    pcResult = 0;
-    rounds = 0;
+game.addEventListener(`click`, function() {
+    params.rounds = 0;
+    params.pcResult = 0;
+    params.playerResult = 0;
     output.innerText = ``;
-    rounds = window.prompt(`Podaj liczbę rund`);
-    if (isNaN(rounds)) {
-        document.querySelector(`#rounds`).innerText = `Wprowadź liczbę`;
-    } else if (rounds === `` || rounds === null) {
-        document.querySelector(`#rounds`).innerText = `wprowadź liczbę rund`;
-    } else if (rounds < 0 || rounds == 0) {
-        document.querySelector(`#rounds`).innerText = `Liczba rund nie może być ujemna lub równa zero`;
+    playerResult.innerText = params.playerResult;
+    pcResult.innerText = params.pcResult;
+    params.rounds = window.prompt(`Podaj liczbę rund`);
+    if (isNaN(params.rounds)) {
+        output2.innerText = `Wprowadź liczbę`;
+        console.log(`wprowadz liczbe`);
+    } else if (params.rounds === `` || params.rounds === null) {
+        output2.innerText = `wprowadź liczbę rund`;
+    } else if (params.rounds < 0 || params.rounds == 0) {
+        output2.innerText = `Liczba rund nie może być ujemna lub równa zero`;
     } else {
-        document.querySelector(`#rounds`).innerText = `Wybrałeś rund: ${rounds}`;
+        output2.innerText = `Wybrałeś rund: ${params.rounds}`;
     }
 });
 
@@ -77,27 +82,27 @@ for (ele of button) {
 //function for choose button
 function buttonClick(ele) {
     return function() {
-        move = ele.getAttribute('data-move');
-        console.log(move);
+        params.move = ele.getAttribute('data-move');
+        console.log(params.move);
         plMove();
     };
 }
 
 //function for player choice 
 function plMove() {
-    if (rounds > 0) {
-        if (move == `paper`) {
+    if (params.rounds > 0) {
+        if (params.move == `paper`) {
             output.innerText = `Wybrałeś papier i`;
-            playerMove = 1;
-        } else if (move == `stone`) {
-            playerMove = 2;
+            params.playerMove = 1;
+        } else if (params.move == `stone`) {
+            params.playerMove = 2;
             output.innerText = `Wybrałeś kamień i`;
-        } else if (move == `scissors`) {
-            playerMove = 3;
+        } else if (params.move == `scissors`) {
+            params.playerMove = 3;
             output.innerText = `Wybrałeś nożyczki i`;
         }
-        console.log(playerMove);
-        pcMove = drawComputer();
+        console.log(params.playerMove);
+        params.pcMove = drawComputer();
         check();
     }
 }
