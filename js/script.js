@@ -1,5 +1,5 @@
 `use strict`;
-
+let player;
 let computerMove;
 const button = document.querySelectorAll(`.player-move`);
 const playerResult = document.querySelector(`#playerResult`);
@@ -10,6 +10,8 @@ const output2 = document.querySelector(`#rounds`);
 const output = document.querySelector(`#output`);
 const game = document.querySelector(`#new_game`);
 const tabl = document.querySelector(`.table`);
+const playerName = document.querySelectorAll(`.player`);
+console.log(playerName);
 
 const params = {
     move: ``,
@@ -71,6 +73,20 @@ function push(text) {
     params.progress.push({ plM: params.move, pcM: params.pcMove, pcT: params.pcText, rr: text, orp: params.playerResult, orpc: params.pcResult })
 }
 
+//get player name
+function name() {
+    player = window.prompt('Podaj swoją nazwę');
+    playerName.forEach(ele => {
+        console.log(ele);
+        if (player != '') {
+            ele.innerText = `:${player}`;
+        }
+        else {
+            ele.innerText = ':Gracz';
+        }
+    })
+}
+
 //new gam button 
 game.addEventListener(`click`, function () {
     reset();
@@ -82,11 +98,15 @@ game.addEventListener(`click`, function () {
     params.pcText = ``;
     playerResult.innerText = params.playerResult;
     pcResult.innerText = params.pcResult;
+    name();
     params.rounds = window.prompt(`Podaj liczbę rund`);
-    if ((isNaN(params.rounds)) || params.rounds === `` || params.rounds === null) {
+    if ((isNaN(params.rounds)) || params.rounds === ``) {
         alert(`Błąd! Liczba rund musi być liczbą`);
     } else if (params.rounds < 0 || params.rounds == 0) {
         alert(`Błąd! Liczba rund nie może być ujemna lub równa zero`);
+    }
+    else if (params.rounds === null) {
+        alert(`Błąd! Brak danych`);
     } else {
         output2.innerText = `Wybrałeś rund: ${params.rounds}`;
     }
