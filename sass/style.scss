@@ -1,18 +1,31 @@
 body {
   margin: 0 auto;
   font-family: "Open Sans", sans-serif;
+  font-weight: bold;
 }
 
 .container {
   margin: 0 auto;
   padding: 30px 50px;
   width: 400px;
-  background-color: #f2bb13;
+  background-color: #D0E8F2;
+  #new_game{
+      width: 100%;
+  }
   button {
+    font-weight: bold;
     margin: 10px 0;
     width: 100px;
     height: 35px;
-    background-color: #d94b2b;
+    background-color: #D0E8F2;
+    border-radius: 5px;
+    border: 2px solid #F28704;
+    color: #F28704;
+    cursor: pointer;
+    &:hover {
+        color: #D0E8F2;
+        background-color: #F28704;
+    }
   }
   p {
     padding: 0;
@@ -41,13 +54,19 @@ body {
   .overal {
     display: flex;
     justify-content: space-between;
+    p{
+        margin-right: 10px;
+        &:last-child{
+            margin-right: 0;
+        }
+    }
   }
 }
 
 .modal {
   padding: 15px;
   display: none;
-  background: #fff;
+  background: #D0E8F2;
   width: 400px;
   position: absolute;
   top: 50%;
@@ -77,10 +96,9 @@ table {
 th,
 td {
   padding: 0.25rem;
-  text-align: left;
-  border: 1px solid #ccc;
+  border: 1px solid #F28704;
   text-align: center;
 }
 tbody tr:nth-child(odd) {
-  background: #eee;
+  background: #2A8FA8;
 }

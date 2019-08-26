@@ -16,33 +16,27 @@
             <button id="scissors" data-move="scissors" class="player-move">nożyce</button>
             <button id="paper" data-move="paper" class="player-move">papier</button>
         </div>
-        <div id="rounds"></div>
-
         <div class="row">
             <p>Komputer:</p>
             <div id="pcResult">0</div>
             <div id="playerResult">0</div>
-            <p>:Gracz</p>
+            <p class="player">:Gracz</p>
         </div>
+        <div id="rounds"></div>
     </div>
-    <!--
-    <div class="overlay" id="modal-overlay">
-        <div class="modal" id="modal-one">
-            <a href="#" class="close">x</a>
-            <header>Modal one</header>
-            <div class="content">
-                <p>Dolor sit amet!</p>
-            </div>
-        </div>
-    </div>-->
     <div class="overlay" id="modal-overlay">
         <div class="row modal">
+            <a href="#" class="close">x</a>
             <div id="output"></div>
             <div class="overal">
-                <p>Komputer:</p>
-                <p id="pcResultModal">Wynik</p>
-                <p id="playerResultModal">Wynik </p>
-                <p>:Gracz</p>
+                <div class="row">
+                    <p>Komputer:</p>
+                    <p id="pcResultModal">Wynik</p>
+                </div>
+                <div class="row">
+                    <p id="playerResultModal">Wynik </p>
+                    <p class="player">:Gracz</p>
+                </div>
             </div>
             <table>
                 <tbody class="table">
